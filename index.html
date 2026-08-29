@@ -36,9 +36,15 @@ h1{margin:0;font-size:64px;font-weight:700;line-height:1.03;letter-spacing:-.035
 .signup-form button{font-family:'Inter','Segoe UI',Arial,sans-serif;width:100%;height:58px;margin:6px 0 0;padding:0 18px;border:0;border-radius:5px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;line-height:58px;text-transform:uppercase;letter-spacing:.01em;cursor:pointer;box-shadow:none}
 .signup-form button:hover,.signup-form button:focus{background:var(--accent-hover)}
 .signup-form button:focus{outline:2px solid rgba(135,173,178,.85);outline-offset:2px}
+.signup-form button:disabled{cursor:wait;opacity:.78}
+.signup-confirmation{width:100%;padding:22px 24px;border:1px solid rgba(255,255,255,.24);border-radius:5px;background:rgba(10,16,18,.48);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#fff;outline:none}
+.signup-confirmation h2{margin:0 0 10px;font-size:26px;font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.signup-confirmation p,.signup-error{margin:0;font-size:16px;font-weight:400;line-height:1.55;color:rgba(255,255,255,.84)}
+.signup-error{margin-top:12px;color:#fff}
+[hidden]{display:none!important}
 
 @media(max-width:1100px){.content{padding:60px 54px 52px}.logo{width:430px;max-width:52vw;margin-bottom:54px}.copy,.signup{max-width:610px}h1{font-size:54px}.lead,.intro{font-size:19px}}
-@media(max-width:760px){.hero{align-items:end;background-position:66% center}.hero:before{background:linear-gradient(0deg,rgba(4,10,12,.96) 0%,rgba(4,10,12,.84) 47%,rgba(4,10,12,.42) 76%,rgba(4,10,12,.14) 100%)}.content{width:100%;padding:28px 22px 24px}.logo{width:min(72vw,330px);max-width:none;margin-bottom:30px}.copy,.signup{width:100%;max-width:100%}h1{font-size:clamp(42px,11vw,54px);line-height:1.02;max-width:10ch}.lead,.intro{font-size:17px;line-height:1.45}.lead{margin-top:22px}.intro{margin-top:17px}.signup{margin-top:22px}.form-field{margin-bottom:11px}.signup-form input[type="text"],.signup-form input[type="email"],.signup-form button{height:56px;line-height:56px}.signup-form input[type="text"],.signup-form input[type="email"]{font-size:16px;padding-left:57px}.form-field::before{left:19px;width:21px;height:21px;background-size:21px 21px}.signup-form button{margin-top:3px;font-size:15px}.desktop-break{display:none}}
+@media(max-width:760px){.hero{align-items:end;background-position:66% center}.hero:before{background:linear-gradient(0deg,rgba(4,10,12,.96) 0%,rgba(4,10,12,.84) 47%,rgba(4,10,12,.42) 76%,rgba(4,10,12,.14) 100%)}.content{width:100%;padding:28px 22px 24px}.logo{width:min(72vw,330px);max-width:none;margin-bottom:30px}.copy,.signup{width:100%;max-width:100%}h1{font-size:clamp(42px,11vw,54px);line-height:1.02;max-width:10ch}.lead,.intro{font-size:17px;line-height:1.45}.lead{margin-top:22px}.intro{margin-top:17px}.signup{margin-top:22px}.form-field{margin-bottom:11px}.signup-form input[type="text"],.signup-form input[type="email"],.signup-form button{height:56px;line-height:56px}.signup-form input[type="text"],.signup-form input[type="email"]{font-size:16px;padding-left:57px}.form-field::before{left:19px;width:21px;height:21px;background-size:21px 21px}.signup-form button{margin-top:3px;font-size:15px}.signup-confirmation{padding:20px}.signup-confirmation h2{font-size:23px}.signup-confirmation p,.signup-error{font-size:15px}.desktop-break{display:none}}
 </style>
 </head>
 <body>
@@ -57,9 +63,61 @@ h1{margin:0;font-size:64px;font-weight:700;line-height:1.03;letter-spacing:-.035
 <input type="hidden" name="ml-submit" value="1">
 <input type="hidden" name="anticsrf" value="true">
 <button type="submit">KEEP ME UPDATED</button>
+<p class="signup-error" role="alert" hidden>Sorry, something went wrong. Please try again.</p>
 </form>
+<div class="signup-confirmation" role="status" aria-live="polite" tabindex="-1" hidden>
+<h2>You're on the list!</h2>
+<p>Thanks for joining us. We'll be in touch with any new developments, guided mountain days and upcoming Aktivtrek adventures.</p>
+</div>
 </div>
 </section>
 </main>
+<script>
+(function(){
+  var form=document.querySelector('.signup-form');
+  var confirmation=document.querySelector('.signup-confirmation');
+  var errorMessage=document.querySelector('.signup-error');
+  if(!form||!confirmation){return;}
+
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    var button=form.querySelector('button[type="submit"]');
+    var originalText=button.textContent;
+    var formData=new FormData(form);
+    var body=new URLSearchParams(formData);
+
+    errorMessage.hidden=true;
+    button.disabled=true;
+    button.textContent='JOINING...';
+
+    fetch(form.action,{
+      method:'POST',
+      headers:{'Accept':'application/json','Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+      body:body
+    }).then(function(response){
+      return response.text().then(function(text){
+        var data={};
+        try{data=JSON.parse(text);}catch(error){}
+        if(!response.ok||data.success===false||data.error){
+          throw new Error(data.message||'Signup failed');
+        }
+      });
+    }).then(function(){
+      form.hidden=true;
+      confirmation.hidden=false;
+      confirmation.focus();
+    }).catch(function(){
+      errorMessage.hidden=false;
+      button.disabled=false;
+      button.textContent=originalText;
+    });
+  });
+})();
+</script>
 </body>
 </html>
