@@ -24,39 +24,22 @@ h1{margin:0;font-size:64px;font-weight:700;line-height:1.03;letter-spacing:-.035
 .lead{margin-top:30px}.intro{margin-top:22px}
 .signup{margin-top:30px}
 
-/* MailerLite embed, visually matched to the Aktivtrek holding page */
-.signup .ml-form-embedContainer{width:100%!important;margin:0!important;padding:0!important}
-.signup .ml-form-align-center{text-align:left!important}
-.signup .ml-form-embedWrapper{width:100%!important;max-width:none!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important}
-.signup .ml-form-embedBody,.signup .ml-form-successBody{padding:0!important;background:transparent!important}
-.signup .ml-form-embedContent{display:none!important}
-.signup .ml-form-formContent{margin:0!important;padding:0!important;width:100%!important}
-.signup .ml-form-fieldRow{position:relative!important;margin:0 0 14px!important;width:100%!important}
-.signup .ml-field-group{position:relative!important}
-.signup .ml-field-group::before{content:"";position:absolute;left:20px;top:50%;transform:translateY(-50%);width:22px;height:22px;background-repeat:no-repeat;background-position:center;background-size:22px 22px;pointer-events:none;z-index:4;opacity:.8}
-.signup .ml-field-name::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.5'/%3E%3Cpath d='M5 21c0-4.1 2.8-7 7-7s7 2.9 7 7'/%3E%3C/svg%3E")}
-.signup .ml-field-email::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='1.5'/%3E%3Cpath d='m4 7 8 6 8-6'/%3E%3C/svg%3E")}
-.signup .ml-form-fieldRow input{font-family:'Inter','Segoe UI',Arial,sans-serif!important;width:100%!important;max-width:100%!important;height:58px!important;line-height:58px!important;margin:0!important;padding:0 18px 0 60px!important;border:1px solid var(--line)!important;border-radius:5px!important;background:var(--field)!important;color:#fff!important;font-size:16px!important;font-weight:400!important;outline:none!important;box-shadow:none!important;box-sizing:border-box!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
-.signup .ml-form-fieldRow input::placeholder{color:rgba(255,255,255,.70)!important;opacity:1!important}
-.signup .ml-form-fieldRow input:focus{border-color:rgba(135,173,178,.85)!important;box-shadow:0 0 0 2px rgba(56,86,91,.28)!important}
-.signup .ml-form-embedSubmit{margin:6px 0 0!important;padding:0!important;width:100%!important}
-.signup .ml-form-embedSubmit button{font-family:'Inter','Segoe UI',Arial,sans-serif!important;width:100%!important;height:58px!important;margin:0!important;padding:0 18px!important;border:0!important;border-radius:5px!important;background:var(--accent)!important;color:#fff!important;font-size:16px!important;font-weight:700!important;line-height:58px!important;text-transform:uppercase!important;letter-spacing:.01em!important;cursor:pointer!important;box-shadow:none!important}
-.signup .ml-form-embedSubmit button:hover{background:var(--accent-hover)!important}
-.signup .ml-form-successBody{color:#fff!important;font-family:'Inter','Segoe UI',Arial,sans-serif!important}
-.signup .ml-form-successContent h4,.signup .ml-form-successContent p{color:#fff!important;font-family:'Inter','Segoe UI',Arial,sans-serif!important;text-align:left!important}
-.signup .ml-form-successContent h4{font-size:22px!important;margin:0 0 8px!important}
-.signup .ml-form-successContent p{font-size:16px!important;line-height:1.5!important;margin:0!important}
+/* Custom Aktivtrek signup form */
+.signup-form{width:100%;margin:0;padding:0}
+.form-field{position:relative;margin:0 0 14px;width:100%}
+.form-field::before{content:"";position:absolute;left:20px;top:50%;transform:translateY(-50%);width:22px;height:22px;background-repeat:no-repeat;background-position:center;background-size:22px 22px;pointer-events:none;z-index:1;opacity:.8}
+.form-field.name::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.5'/%3E%3Cpath d='M5 21c0-4.1 2.8-7 7-7s7 2.9 7 7'/%3E%3C/svg%3E")}
+.form-field.email::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='1.5'/%3E%3Cpath d='m4 7 8 6 8-6'/%3E%3C/svg%3E")}
+.signup-form input[type="text"],.signup-form input[type="email"]{font-family:'Inter','Segoe UI',Arial,sans-serif;width:100%;max-width:100%;height:58px;line-height:58px;margin:0;padding:0 18px 0 60px;border:1px solid var(--line);border-radius:5px;background:var(--field);color:#fff;font-size:16px;font-weight:400;outline:none;box-shadow:none;box-sizing:border-box;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.signup-form input::placeholder{color:rgba(255,255,255,.70);opacity:1}
+.signup-form input:focus{border-color:rgba(135,173,178,.85);box-shadow:0 0 0 2px rgba(56,86,91,.28)}
+.signup-form button{font-family:'Inter','Segoe UI',Arial,sans-serif;width:100%;height:58px;margin:6px 0 0;padding:0 18px;border:0;border-radius:5px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;line-height:58px;text-transform:uppercase;letter-spacing:.01em;cursor:pointer;box-shadow:none}
+.signup-form button:hover,.signup-form button:focus{background:var(--accent-hover)}
+.signup-form button:focus{outline:2px solid rgba(135,173,178,.85);outline-offset:2px}
 
 @media(max-width:1100px){.content{padding:60px 54px 52px}.logo{width:430px;max-width:52vw;margin-bottom:54px}.copy,.signup{max-width:610px}h1{font-size:54px}.lead,.intro{font-size:19px}}
-@media(max-width:760px){.hero{align-items:end;background-position:66% center}.hero:before{background:linear-gradient(0deg,rgba(4,10,12,.96) 0%,rgba(4,10,12,.84) 47%,rgba(4,10,12,.42) 76%,rgba(4,10,12,.14) 100%)}.content{width:100%;padding:28px 22px 24px}.logo{width:min(72vw,330px);max-width:none;margin-bottom:30px}.copy,.signup{width:100%;max-width:100%}h1{font-size:clamp(42px,11vw,54px);line-height:1.02;max-width:10ch}.lead,.intro{font-size:17px;line-height:1.45}.lead{margin-top:22px}.intro{margin-top:17px}.signup{margin-top:22px}.signup .ml-form-fieldRow{margin-bottom:11px!important}.signup .ml-form-fieldRow input,.signup .ml-form-embedSubmit button{height:56px!important;line-height:56px!important}.signup .ml-form-fieldRow input{font-size:16px!important;padding-left:57px!important}.signup .ml-field-group::before{left:19px;width:21px;height:21px;background-size:21px 21px}.signup .ml-form-embedSubmit{margin-top:3px!important}.signup .ml-form-embedSubmit button{font-size:15px!important}.desktop-break{display:none}}
+@media(max-width:760px){.hero{align-items:end;background-position:66% center}.hero:before{background:linear-gradient(0deg,rgba(4,10,12,.96) 0%,rgba(4,10,12,.84) 47%,rgba(4,10,12,.42) 76%,rgba(4,10,12,.14) 100%)}.content{width:100%;padding:28px 22px 24px}.logo{width:min(72vw,330px);max-width:none;margin-bottom:30px}.copy,.signup{width:100%;max-width:100%}h1{font-size:clamp(42px,11vw,54px);line-height:1.02;max-width:10ch}.lead,.intro{font-size:17px;line-height:1.45}.lead{margin-top:22px}.intro{margin-top:17px}.signup{margin-top:22px}.form-field{margin-bottom:11px}.signup-form input[type="text"],.signup-form input[type="email"],.signup-form button{height:56px;line-height:56px}.signup-form input[type="text"],.signup-form input[type="email"]{font-size:16px;padding-left:57px}.form-field::before{left:19px;width:21px;height:21px;background-size:21px 21px}.signup-form button{margin-top:3px;font-size:15px}.desktop-break{display:none}}
 </style>
-
-<!-- MailerLite Universal -->
-<script>
-(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-ml('account','2603666');
-</script>
-<!-- End MailerLite Universal -->
 </head>
 <body>
 <main class="hero">
@@ -68,7 +51,13 @@ ml('account','2603666');
 <p class="intro">Join the mailing list to hear about new courses,<br class="desktop-break"> guided days and upcoming adventures.</p>
 </div>
 <div class="signup">
-<div class="ml-embedded" data-form="6UWVoe"></div>
+<form class="signup-form" action="https://assets.mailerlite.com/jsonp/2603666/forms/197139200884082239/subscribe" method="post">
+<div class="form-field name"><input type="text" name="fields[name]" placeholder="Name" autocomplete="name" aria-label="Name"></div>
+<div class="form-field email"><input type="email" name="fields[email]" placeholder="Email address" autocomplete="email" aria-label="Email address" required></div>
+<input type="hidden" name="ml-submit" value="1">
+<input type="hidden" name="anticsrf" value="true">
+<button type="submit">KEEP ME UPDATED</button>
+</form>
 </div>
 </section>
 </main>
